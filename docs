@@ -1,0 +1,41 @@
+erDiagram
+    USERS ||--o{ TICKETS : "abre (client_id)"
+    USERS ||--o{ TICKETS : "atende (technician_id)"
+    CATEGORIES ||--o{ TICKETS : "classifica"
+    TICKETS ||--o{ TICKET_MESSAGES : "possui"
+    USERS ||--o{ TICKET_MESSAGES : "envia"
+
+    USERS {
+        int id PK
+        string name
+        string email
+        string password_hash
+        string role
+    }
+
+    CATEGORIES {
+        int id PK
+        string name
+        string description
+    }
+
+    TICKETS {
+        int id PK
+        string title
+        text description
+        string status
+        string priority
+        int client_id FK
+        int technician_id FK
+        int category_id FK
+        datetime created_at
+        datetime closed_at
+    }
+
+    TICKET_MESSAGES {
+        int id PK
+        int ticket_id FK
+        int sender_id FK
+        text message
+        datetime created_at
+    }
